@@ -13,6 +13,10 @@ import nintendo from "../img/nintendo.svg";
 import apple from "../img/apple.svg";
 import gamepad from "../img/gamepad.svg";
 
+//star images
+import starEmpty from "../img/star-empty.png";
+import starFull from "../img/star-full.png";
+
 const GameDetail = ({ pathId }) => {
   const history = useHistory();
 
@@ -23,6 +27,20 @@ const GameDetail = ({ pathId }) => {
       document.body.style.overflow = "auto";
       history.push("/");
     }
+  };
+
+  //get stars
+  const getStars = (numberRating) => {
+    const stars = [];
+    const rating = Math.round(numberRating);
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<img alt="star" key={i} src={starFull} />);
+      } else {
+        stars.push(<img alt="star" key={i} src={starEmpty} />);
+      }
+    }
+    return stars;
   };
 
   //get platform images
@@ -60,6 +78,7 @@ const GameDetail = ({ pathId }) => {
               <div className="rating">
                 <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
                 <p>Rating: {game.rating}</p>
+                {getStars(game.rating)}
               </div>
               <Info>
                 <h3>Platforms</h3>
@@ -138,6 +157,11 @@ const Stats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  img {
+    width: 1.8rem;
+    height: 1.8rem;
+    display: inline;
+  }
 `;
 
 const Info = styled(motion.div)`
