@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadGames } from "../actions/gamesAction";
 
@@ -13,6 +13,13 @@ const Home = () => {
   //get the current location
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
+  let { id } = useParams();
+
+  useEffect(() => {
+    id
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "auto");
+  }, [id]);
 
   //fetch games
   const dispatch = useDispatch();
