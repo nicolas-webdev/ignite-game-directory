@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadGames } from "../actions/gamesAction";
 
 import styled from "styled-components";
+import { fadeIn } from "../animations";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 import Game from "../components/Game";
@@ -32,7 +33,7 @@ const Home = () => {
 
   return (
     <div>
-      <GameList>
+      <GameList variants={fadeIn} initial="hidden" animate="show">
         <AnimateSharedLayout type="crossfade">
           <AnimatePresence>
             {pathId && <GameDetail pathId={pathId} />}
